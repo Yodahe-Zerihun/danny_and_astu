@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wedding of Danny & Astu</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Pinyon+Script&family=Alex+Brush&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --white: #ffffff;
+            --gold: #c5a059;
+            --text-dark: #2c2c2c;
+            --text-light: #666666;
+            --bg-off-white: #fcfcfc;
+            --overlay-dark: rgba(0, 0, 0, 0.5);
+            --overlay-light: rgba(0, 0, 0, 0.7); 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(255, 255, 255, 0.98);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            margin-left: 30px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: var(--gold);
+        }
+
+        /* Announcement Section */
+        .announcement {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Center for Desktop */
+            text-align: center;
+            background: linear-gradient(var(--overlay-dark), var(--overlay-dark)), 
+                        url('images/bg6.JPG');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            clip-path: ellipse(150% 100% at 50% 0%);
+            padding: 0 20px;
+        }
+
+        .announcement h1 {
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        /* Save the Date Section */
+        .save-the-date {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px 150px 20px;
+            text-align: center;
+            background: linear-gradient(var(--overlay-light), var(--overlay-light)), 
+                        url('images/bg5.JPG');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white; 
+            clip-path: ellipse(150% 100% at 50% 0%);
+            margin-top: -50px;
+        }
+
+        .save-the-date .section-title {
+            font-family: 'Alex Brush', cursive; 
+            font-size: clamp(3rem, 8vw, 4.5rem); 
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: none; 
+            color: var(--white); 
+            margin-bottom: 20px;
+        }
+
+        .invitation-letter {
+            padding: 120px 20px;
+            background-color: var(--white);
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .invitation-text {
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            font-size: 1rem;
+            color: var(--text-light);
+            line-height: 2.2;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .calendar-wrap {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .calendar-month {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            margin-bottom: 30px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
+            gap: clamp(10px, 2vw, 20px);
+        }
+
+        .calendar-grid span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            width: 40px;
+            margin: 0 auto;
+        }
+
+        .circle-day {
+            position: relative;
+            font-weight: 700;
+            color: var(--gold) !important;
+        }
+
+        .circle-day::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 45px;
+            height: 45px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 6vw, 2.8rem);
+            margin-bottom: 40px;
+        }
+
+        .loc-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 18px;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .loc-btn:hover {
+            background-color: var(--gold);
+            color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .gallery-item {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transform: scale(0.9) translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .gallery-item.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .map-container {
+            width: 100%;
+            height: 350px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+
+        .map-container iframe {
+            width: 100% !important;
+            height: 100% !important;
+            border: 0;
+        }
+
+        .footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: #fff;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; }
+            .burger { display: block; }
+            
+            /* Pushes Home text to the Top on Mobile */
+            .announcement { 
+                justify-content: flex-start; 
+                padding-top: 120px; 
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.4s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.show { right: 0; }
+            .nav-links li { margin: 20px 0; }
+            .nav-links li a { margin-left: 0; font-size: 1.1rem; }
+
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item { height: 300px; }
+            
+            .circle-day::before {
+                width: 38px;
+                height: 38px;
+            }
+
+            .program-item {
+                padding-left: 20px !important;
+            }
+        }
+
+        /* Footer */
+.footer {
+  background: #1c1c1c;
+  color: #ffffff;
+  text-align: center;
+  padding: 6rem 1.5rem;
+}
+
+.footer-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Branding */
+.footer-branding {
+  margin-bottom: 4rem;
+}
+
+.footer-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.footer-divider .line {
+  width: 3rem;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.footer-divider span {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.6em;
+  opacity: 0.4;
+}
+
+.footer-branding h2 {
+  font-size: 3rem;
+  font-family: serif;
+  font-style: italic;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.03em;
+}
+
+.footer-branding p {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-weight: 300;
+  opacity: 0.2;
+}
+
+/* Navigation */
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-weight: 500;
+  opacity: 0.4;
+}
+
+.footer-links a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.footer-links a:hover {
+  opacity: 1;
+}
+
+/* Bottom Section */
+.footer-bottom {
+  margin-top: 6rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.location,
+.copyright,
+.couple-access {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+}
+
+.location {
+  opacity: 0.2;
+  font-style: italic;
+}
+
+.footer-extra {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Button */
+.couple-access {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  opacity: 0.2;
+  transition: opacity 0.3s ease;
+}
+
+.couple-access:hover {
+  opacity: 1;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  background: #c8a96b;
+  border-radius: 50%;
+
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.couple-access:hover .dot {
+  opacity: 1;
+}
+
+.copyright {
+  opacity: 0.1;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .footer {
+    padding: 6rem 3rem;
+  }
+
+  .footer-links {
+    flex-direction: row;
+    gap: 4rem;
+  }
+
+  .footer-bottom {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer {
+    padding: 6rem;
+  }
+}
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">D & A</div>
+        <button class="burger" id="burgerToggle" onclick="toggleMenu()">☰</button>
+        <ul class="nav-links" id="navMenu">
+            <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+            <li><a href="#save-date" onclick="toggleMenu()">Date</a></li>
+            <li><a href="#invitation" onclick="toggleMenu()">Invitation</a></li>
+            <li><a href="#program" onclick="toggleMenu()">Program</a></li>
+            <li><a href="#gallery" onclick="toggleMenu()">Gallery</a></li>
+            <li><a href="#location" onclick="toggleMenu()">Location</a></li>
+        </ul>
+    </nav>
+
+    <header id="home" class="announcement">
+        <div class="reveal active">
+            <p style="letter-spacing: 5px; text-transform: uppercase; font-size: 0.8rem;">The Wedding of</p>
+            <h1>Danny & Astu</h1>
+            <div style="margin-top: 25px; padding: 0 10px;">
+                <p style="font-size: 0.95rem; letter-spacing: 1px; font-weight: 300; opacity: 0.95; max-width: 300px; margin: 0 auto; font-style: italic; line-height: 1.4;">
+                    "I have become a sign to many; you are my strong refuge."
+                </p>
+                <p style="font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase; margin-top: 10px; font-weight: 400;">
+                    - Ps 71:7
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <section id="save-date" class="save-the-date">
+        <div class="calendar-wrap reveal">
+            <h2 class="section-title">Save The Date</h2>
+            <div class="calendar-month">MAY 2026</div>
+            <div class="calendar-grid">
+                <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+                <span></span><span></span><span></span><span></span><span>1</span><span>2</span><span>3</span>
+                <span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span class="circle-day">16</span><span>17</span>
+                <span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span>
+                <span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="invitation" class="invitation-letter reveal">
+        <h2 class="section-title" style="color: var(--gold);">Our Invitation</h2>
+        <div class="invitation-text">
+            <p>Because you have shared in our lives with your friendship and love, we, </p>
+            <p style="font-family: 'Playfair Display'; color: var(--gold); margin: 15px 0; font-size: 2.2rem; text-transform: none;">Danny & Astu</p>
+            <p>together with our families, invite you to join us as we exchange vows and begin our new life together. Your presence would make our celebration truly complete.</p>
+        </div>
+    </section>
+
+    <section id="program" class="section" style="background-color: var(--bg-off-white);">
+        <h2 class="section-title reveal">The Program</h2>
+        <div style="max-width: 700px; margin: 0 auto; text-align: left;">
+            <div style="border-left: 2px solid var(--gold); padding-left: 30px; margin-bottom: 40px;" class="reveal program-item">
+                <p style="color: var(--gold); font-size: 0.9rem; font-weight: bold;">5:00 AM - 6:00 PM LT</p>
+                <h3>Stay at the groom's and the bride's house</h3>
+                <p style="color: var(--text-light);">Groom's family will be at the groom's house and the bride's family will stay at the bride's house.</p>
+                <a href="https://maps.google.com/maps?q=8.979936,38.716381&ll=8.979936,38.716381&z=16" target="_blank" class="loc-btn">Bride's Location</a>
+                <a href="https://maps.app.goo.gl/RjPSUiqiN95MWSbg7" target="_blank" class="loc-btn">Groom's Location</a>
+            </div>
+            <div style="border-left: 2px solid var(--gold); padding-left: 30px; margin-bottom: 40px;" class="reveal program-item">
+                <p style="color: var(--gold); font-size: 0.9rem; font-weight: bold;">6:30 PM LT</p>
+                <h3>Journey to the bride's house</h3>
+                <p style="color: var(--text-light);">The groom together with his familly and friends will go to the bride's house.</p>
+                <a href="https://maps.google.com/maps?q=8.979936,38.716381&ll=8.979936,38.716381&z=16" target="_blank" class="loc-btn">Bride's Location</a>
+            </div>
+            <div style="border-left: 2px solid var(--gold); padding-left: 30px; margin-bottom: 40px;" class="reveal program-item">
+                <p style="color: var(--gold); font-size: 0.9rem; font-weight: bold;">2:00 PM - 4:30 PM LT</p>
+                <h3>Worship, Word of God & Vows</h3>
+                <p style="color: var(--text-light);">A heartfelt exchange of vows and worship at Kotebe Muluwongel Church.</p>
+                <a href="https://maps.app.goo.gl/jfcFED3ymiFtvfqd6" target="_blank" class="loc-btn">Church Location</a>
+            </div>
+
+            <div style="border-left: 2px solid var(--gold); padding-left: 30px; margin-bottom: 40px;" class="reveal program-item">
+                <p style="color: var(--gold); font-size: 0.9rem; font-weight: bold;">6:00 PM LT</p>
+                <h3>Cocktail Hour</h3>
+                <p style="color: var(--text-light);">Cake ceremony, worship, and a beautiful photoshoot as we capture our first moments as Mr. & Mrs.</p>
+                <a href="https://maps.app.goo.gl/jfcFED3ymiFtvfqd6" target="_blank" class="loc-btn">View Location</a>
+            </div>
+
+            <div style="border-left: 2px solid var(--gold); padding-left: 30px;" class="reveal program-item">
+                <p style="color: var(--gold); font-size: 0.9rem; font-weight: bold;">7:00 PM LT</p>
+                <h3>The Reception</h3>
+                <p style="color: var(--text-light);">Heartfelt farewells and warm wishes as we conclude the celebration with our beloved family and friends.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="section">
+        <h2 class="section-title reveal">Our Moments</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item" style="background-image: url('images/a1.jpg'); transition-delay: 0.1s;"></div>
+            <div class="gallery-item" style="background-image: url('images/a2.JPG'); transition-delay: 0.2s;"></div>
+            <div class="gallery-item" style="background-image: url('images/a5.JPG'); transition-delay: 0.2s;"></div>
+            <div class="gallery-item" style="background-image: url('images/a3.JPG'); transition-delay: 0.3s;"></div>
+        </div>
+    </section>
+
+    <section id="location" class="section">
+        <h2 class="section-title reveal">The Venue</h2>
+        <p class="reveal" style="margin-bottom: 10px; color: var(--text-light);">Kotebe Full Gospel Believers Church, Addis Ababa</p>
+        <div class="reveal" style="margin-bottom: 30px;">
+            <a href="#" target="_blank" 
+               style="text-decoration: none; color: var(--gold); border: 1px solid var(--gold); padding: 10px 20px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; display: inline-block;">
+                 Open in Google Maps
+            </a>
+        </div>
+        <div class="map-container reveal">
+           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.366847172422!2d38.8368287!3d9.030260499999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b91f7dad927a9%3A0xec794164d995a68f!2sKotebe%20Full%20Gospel!5e0!3m2!1sen!2set!4v1775117865298!5m2!1sen!2set" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <footer class="footer">
+  <div class="footer-container">
+
+    <!-- Branding -->
+    <div class="footer-branding">
+      <div class="footer-divider">
+        <div class="line"></div>
+        <span>Est. 2026</span>
+        <div class="line"></div>
+      </div>
+
+      <h2>Danny & Astu</h2>
+      <p>Forever / Ever After</p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="footer-links">
+      <a href="#save-date">Date</a>
+      <a href="#invitation">Invitation</a>
+      <a href="#program">Program</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#location">Location</a>
+    </div>
+
+    <!-- Bottom Section -->
+    <div class="footer-bottom">
+      <span class="location">
+        Kotebe Mulu Wongel Church, Addis Ababa
+      </span>
+
+      <div class="footer-extra">
+        <button class="couple-access">
+          <span class="dot"></span>
+          Couple Access
+        </button>
+
+        <span class="copyright">
+          © 2026 Crafted with Love by Danny & Yodahe
+        </span>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            const burger = document.getElementById('burgerToggle');
+            if (window.innerWidth <= 768) {
+                menu.classList.toggle('show');
+                burger.innerHTML = menu.classList.contains('show') ? '✕' : '☰';
+            }
+        }
+
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal, .gallery-item");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 50) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+    </script>
+</body>
+</html>
